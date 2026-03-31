@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title> Rádio Rb </title>
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial;
+  background: linear-gradient(135deg, #0a2185, #f18831);
+  color: white;
+}
+
+/* HEADER */
+header {
+  text-align: center;
+  padding: 20px;
+}
+
+/* PLAYER */
+.player {
+  text-align: center;
+
+  margin: 20px;
+}
+
+button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 20px;
+  background: #f18831;
+  color: white;
+  cursor: pointer;
+}
+
+/* SLIDER */
+.slider {
+  width: 90%;
+  max-width: 600px;
+  margin: auto;
+  overflow: hidden;
+}
+
+.slides {
+  display: flex;
+  transition: 0.5s;
+}
+
+.slides img {
+  width: 100%;
+}
+
+/* PROGRAMAÇÃO */
+.section {
+  padding: 20px;
+  text-align: center;
+}
+
+.card {
+  background: rgba(255,255,255,0.1);
+  margin: 10px auto;
+  padding: 15px;
+  border-radius: 15px;
+  width: 80%;
+}
+
+/* EQUIPE */
+.team {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.member {
+  margin: 10px;
+}
+
+.member img {
+  width: 100px;
+  border-radius: 50%;
+}
+
+/* CHAT */
+.chat {
+  background: rgba(0,0,0,0.2);
+  padding: 10px;
+  width: 90%;
+  max-width: 400px;
+  margin: auto;
+  border-radius: 15px;
+}
+
+.messages {
+  height: 150px;
+  overflow-y: auto;
+  text-align: left;
+  margin-bottom: 10px;
+}
+
+input {
+  width: 70%;
+  padding: 5px;
+  border-radius: 10px;
+  border: none;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>📻 Rádio RB </h1>
+  <p>onde cada voz vira frequência</p>
+</header>
+
+<!-- PLAYER -->
+<div class="player">
+  <button onclick="toggleAudio()">▶ Play</button>
+  <audio id="audio">
+    <source src="audio.mp3">
+  </audio>
+</div>
+
+<!-- SLIDER -->
+<div class="slider">
+  <div class="slides" id="slides">
+    <img src="imagens/Intreterimento Rádio RB/1.png">
+    <img src="imagens/Intreterimento Rádio RB/2.png">
+    <img src="imagens/Intreterimento Rádio RB/3.png">
+    <img src="imagens/Intreterimento Rádio RB/4.png">
+    <img src="imagens/Intreterimento Rádio RB/5.png">
+    <img src="imagens/Intreterimento Rádio RB/6.png">
+    <img src="imagens/Intreterimento Rádio RB/7.png">
+    <img src="imagens/Intreterimento Rádio RB/8.png">
+    <img src="imagens/Intreterimento Rádio RB/9.png">
+    
+
+
+  </div>
+</div>
+
+<!-- PROGRAMAÇÃO -->
+<div class="section">
+  <h2>📅 Programação</h2>
+  <div class="card">08:00 - Música e Motivação</div>
+  <div class="card">10:00 - Notícias da Escola</div>
+  <div class="card">14:00 - Pedido dos Alunos</div>
+</div>
+
+<!-- EQUIPE -->
+<div class="section">
+  <h2>👥 Nossa Equipe</h2>
+  <div class="team">
+    <div class="member">
+      <img src="https://i.pravatar.cc/100">
+      <p>Locutor 1</p>
+    </div>
+    <div class="member">
+      <img src="https://i.pravatar.cc/101">
+      <p>Locutor 2</p>
+    </div>
+  </div>
+</div>
+
+<!-- CHAT -->
+<div class="section">
+  <h2>💬 Chat dos ouvintes</h2>
+  <div class="chat">
+    <div class="messages" id="chatBox">
+      <p>ana: amando essa rádio 😍</p>
+    </div>
+    <input id="msg" placeholder="manda tua msg...">
+    <button onclick="sendMsg()">Enviar</button>
+  </div>
+</div>
+
+<script>
+/* PLAYER */
+let audio = document.getElementById("audio");
+let playing = false;
+
+function toggleAudio() {
+  if (playing) {
+    audio.pause();
+    event.target.innerText = "▶ Play";
+  } else {
+    audio.play();
+    event.target.innerText = "⏸ Pause";
+  }
+  playing = !playing;
+}
+
+/* SLIDER */
+let i = 0;
+let slides = document.getElementById("slides");
+
+setInterval(() => {
+  i = (i + 1) % slides.children.length;
+  slides.style.transform = `translateX(-${i * 100}%)`;
+}, 3000);
+
+/* CHAT */
+function sendMsg() {
+  let input = document.getElementById("msg");
+  let box = document.getElementById("chatBox");
+
+  if (input.value !== "") {
+    box.innerHTML += `<p>vc: ${input.value}</p>`;
+    input.value = "";
+    box.scrollTop = box.scrollHeight;
+  }
+}
+</script>
+
+</body>
+</html>
